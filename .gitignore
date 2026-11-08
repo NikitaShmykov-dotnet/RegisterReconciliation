@@ -1,0 +1,6 @@
+.local/
+bin/
+obj/
+TestResults/
+.env
+*.user

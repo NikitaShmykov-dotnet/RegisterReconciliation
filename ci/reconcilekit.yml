@@ -1,0 +1,27 @@
+name: RegisterReconciliation
+
+on:
+  push:
+    paths:
+      - 'ReconcileKit/**'
+      - '.github/workflows/reconcilekit.yml'
+  pull_request:
+    paths:
+      - 'ReconcileKit/**'
+      - '.github/workflows/reconcilekit.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ReconcileKit
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: ReconcileKit/global.json
+      - run: dotnet restore RegisterReconciliation.slnx
+      - run: dotnet build RegisterReconciliation.slnx -c Release --no-restore
+      - run: dotnet test RegisterReconciliation.slnx -c Release --no-build
+      - run: dotnet format RegisterReconciliation.slnx --no-restore --verify-no-changes

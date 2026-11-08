@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.14" />
+    <PackageReference Include="Npgsql" Version="10.0.2" />
+    <!-- Migration IDs already stored by earlier versions must survive the project rename. -->
+    <EmbeddedResource Include="Migrations/*.sql" LogicalName="ReconcileKit.Migrations.%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>
